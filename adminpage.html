@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!--this is vvv for placing styles on dynamic data created-->
+    <style>
+      #Contact_Message {
+        color: blue;
+      }
+    </style>
+  </head>
+  <body>
+    <button onclick="window.location.href = 'index.html';">Home</button>
+    <button id="logout">Logout</button>
+    <div id="messages"></div>
+  </body>
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-analytics.js";
+    import {
+      getDatabase,
+      set,
+      ref,
+      get,
+      onChildAdded,
+      onValue,
+    } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js";
+    //import { getAuth } from "https://www.gstatic.com/firebasejs/10.4.0/firebase/auth";
+    import {
+      getAuth,
+      signOut,
+    } from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
+
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+      apiKey: "AIzaSyD7-cJYKndQDuihPSYN_acmjO5rbO-62xw",
+      authDomain: "e-help-d4bfe.firebaseapp.com",
+      databaseURL:
+        "https://e-help-d4bfe-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "e-help-d4bfe",
+      storageBucket: "e-help-d4bfe.appspot.com",
+      messagingSenderId: "515226586822",
+      appId: "1:515226586822:web:7e5e356d683a94cf6b51c7",
+      measurementId: "G-KSEMQ7N4YV",
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const database = getDatabase(app);
+    const auth = getAuth();
+
+    //logout user
+    logout.addEventListener("click", (e) => {
+      signOut(auth)
+        .then(() => {
+          // Sign-out successful.
+          alert("user is signed out");
+          window.location.href = "login.html";
+        })
+        .catch((error) => {
+          // An error happened.
+          const errorMessage = error.message;
+
+          alert(errorMessage);
+        });
+    });
+    const dbRef = ref(database);
+    const checkupdateRef = ref(database, "webtest", "msg");
+
+    onValue(checkupdateRef, (snapshot) => {
+      //clear all elements to prevent duplication of data
+      document.getElementById("messages").innerHTML = "";
+      snapshot.forEach((childSnapshot) => {
+        const childdata = childSnapshot.val();
+
+        for (const [key, value] of Object.entries(childdata)) {
+          if (value.status !== "archived") {
+            var msg = value.message;
+            var uid = value.uid;
+            var date = value.date;
+            var contactid = key;
+            var name = "";
+            var email = "";
+            var contact = "";
+
+            //user details
+            get(dbRef).then((snapshot) => {
+              if (snapshot.exists()) {
+                const datasnapshot = snapshot
+                  .child("webusers")
+                  .child(uid)
+                  .val();
+                name = datasnapshot.fname + " " + datasnapshot.lname;
+                email = datasnapshot.email;
+                contact = datasnapshot.contact;
+                const messages = document.getElementById("messages");
+
+                //create elements container, text, delete button
+                const para = document.createElement("p");
+                const container = document.createElement("div");
+                const deletebtn = document.createElement("input");
+
+                //place id to elements created
+                container.setAttribute("id", "user_message_container");
+                container.setAttribute("class", "holders");
+                para.setAttribute("id", "Contact_Message");
+                deletebtn.setAttribute("id", key);
+                deletebtn.setAttribute("type", "submit");
+                deletebtn.setAttribute("value", "delete");
+
+                //place values to elements
+                para.innerHTML =
+                  value.message + value.date + name + email + contact; //get data message of the user
+
+                container.appendChild(para); //add element to div
+                container.appendChild(deletebtn); //add button to div
+                messages.appendChild(container); //add div to body
+
+                //archive data
+                document.getElementById(key).onclick = function func() {
+                  set(ref(database, "webtest/msg/" + key), {
+                    message: msg,
+                    uid: uid,
+                    date: date,
+                    status: "archived",
+                  });
+                  alert("Message is deleted");
+                };
+              }
+            });
+          }
+        }
+      });
+    });
+  </script>
+</html>
