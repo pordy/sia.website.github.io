@@ -222,7 +222,6 @@
                     uid:user.uid,
                  })
                  alert('user created'); 
-                 window.location.href = "login.html";
                  // ...
              })
             .catch((error) => {
@@ -252,7 +251,7 @@
         }else{
             alert('Please fill up the missing fields');
         }
-        
+        window.location.href = "login.html";
     });
 
   </script>
