@@ -11,7 +11,9 @@
     <!--button logout to go out of session-->
     <button id="logoutButton" style="display: none;"onclick="window.location.href = 'index.html';">Logout</button>
     <!--register page-->
-    <button onclick="window.location.href = 'register.html';">register</button>
+    <button onclick="window.location.href = 'register.html';">Register</button>
+    <!--admin page-->
+    <button id = "adminbtn" onclick="window.location.href = 'adminpage.html';">Admin Page</button>
     <h1>Contact Us</h1>
     <p>Fill out the form below to get in touch with us:</p>
     <div id="Contact_Section">
@@ -93,6 +95,7 @@
             if(uid==="6JbsqW3N2nOtyKNVj4hbUrDRQPy1"){
                 document.getElementById('logoutButton').style.display = "block"; 
                 document.getElementById('loginButton').innerHTML = "Admin";
+                 document.getElementById('adminbtn').style.display = "block"; 
             }else{
                 document.getElementById('logoutButton').style.display = "block"; 
                 document.getElementById('loginButton').innerHTML = "User";
@@ -100,6 +103,7 @@
             // ...
          } else {
             document.getElementById('logoutButton').style.display = "none"; 
+              document.getElementById('adminbtn').style.display = "none"; 
          // User is signed out
             // ...
         }
