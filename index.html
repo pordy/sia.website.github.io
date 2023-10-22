@@ -96,14 +96,17 @@
                 document.getElementById('logoutButton').style.display = "block"; 
                 document.getElementById('loginButton').innerHTML = "Admin";
                  document.getElementById('adminbtn').style.display = "block"; 
+                 document.getElementById('Contact_Section').style.display = "none"; 
             }else{
                 document.getElementById('logoutButton').style.display = "block"; 
                 document.getElementById('loginButton').innerHTML = "User";
+                document.getElementById('Contact_Section').style.display = "block"; 
             }
             // ...
          } else {
             document.getElementById('logoutButton').style.display = "none"; 
-              document.getElementById('adminbtn').style.display = "none"; 
+              document.getElementById('adminbtn').style.display = "none";
+
          // User is signed out
             // ...
         }
