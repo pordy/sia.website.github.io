@@ -212,7 +212,7 @@
                  // Signed up 
 
                  const user = userCredential.user;
-                 set(ref(database,'webusers/'+user.uid),{
+                 set(ref(database,'users/'+user.uid),{
                     email: email,
                     fname: fname,
                     lname: lname,
@@ -222,6 +222,7 @@
                     uid:user.uid,
                  })
                  alert('user created'); 
+                 window.location.href = "index.html";
                  // ...
              })
             .catch((error) => {

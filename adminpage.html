@@ -95,7 +95,7 @@
             get(dbRef).then((snapshot) => {
               if (snapshot.exists()) {
                 const datasnapshot = snapshot
-                  .child("webusers")
+                  .child("users")
                   .child(uid)
                   .val();
                 name = datasnapshot.fname + " " + datasnapshot.lname;
@@ -118,7 +118,7 @@
 
                 //place values to elements
                 para.innerHTML =
-                  value.message + <br> +value.date + <br> + name + <br> + email + <br> + contact; //get data message of the user
+                  value.message +"<br>"+ value.date +"<br>"+ name +"<br>"+ email +"<br>"+ contact; //get data message of the user
 
                 container.appendChild(para); //add element to div
                 container.appendChild(deletebtn); //add button to div
