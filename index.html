@@ -62,7 +62,8 @@
 
     send_contact.addEventListener('click',(e)=>{
         let buttonName = document.getElementById("loginButton").innerText;
-        
+
+        if(
         if(buttonName==='Login'){
             alert('Login first to send a message')
         }else{
@@ -75,14 +76,18 @@
         var date = day+"-"+month+"-"+year; //dd-mm-yyyy
 
         var msg = document.getElementById('message').value;
-
-        //insert user details
-        set(ref(database,'webtest/msg/'+timestamp),{
+        msg.trim();
+        if(msg.length>0){
+            //insert user details
+            set(ref(database,'webtest/msg/'+timestamp),{
             message: msg,
             uid: auth.currentUser.uid,
             date: date,
-         })
-        alert('Message Sent!\n\nThank you for reaching out! Please wait for an update in your email or contact through your phone.');
+            })
+            alert('Message Sent!\n\nThank you for reaching out! Please wait for an update in your email or contact through your phone.');
+        }
+        else{
+            alert('Input Message First!\n\nYou must first input your message before sending.');
         }
     
     });
