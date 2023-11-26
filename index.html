@@ -63,7 +63,6 @@
     send_contact.addEventListener('click',(e)=>{
         let buttonName = document.getElementById("loginButton").innerText;
 
-        if(
         if(buttonName==='Login'){
             alert('Login first to send a message')
         }else{
@@ -89,7 +88,7 @@
         else{
             alert('Input Message First!\n\nYou must first input your message before sending.');
         }
-    
+        }
     });
         //check for sessions
         onAuthStateChanged(auth, (user) => {
