@@ -32,6 +32,13 @@
 
         }
 
+        #logoutButton{
+
+        border-radius: 15px;
+        background-color: #631616;
+        color: white;
+        }
+
     
         header {
             background-color: #333;
@@ -78,32 +85,34 @@
     <header class="bg-white text-dark">
         <div class="container">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-4">
                     
                     <h1 class="text-left ">Tulong Catmon</h1>
                 </div>
-                <div class="col-md-6 p-2 text-right">
+                <div class="col-md-8 p-2 text-right">
                     <button class="btn mr-3 px-4 py-2" id="loginButton" onclick="window.location.href = 'login.html';">Login</button>
                     <button class="btn px-4 py-2" id="regButton" onclick="window.location.href = 'register.html';">Register</button>
-                    <button class="btn btn-danger" id="logoutButton" style="display: none;" onclick="window.location.href = 'index.html';">Logout</button>
                     <button class="btn btn-warning" id="adminbtn" onclick="window.location.href = 'adminpage.html';">Admin Page</button>
                 </div>
             </div>
         </div>
     </header>
     <main class="container p-4">
-        
-        <div id="Contact_Section">
             
-            <h1>Contact Us</h1>
+        <div id="Contact_Section" class="d-flex flex-column">
+            <div class="d-flex">
+                <h2>Contact Us</h2>
+                <button class="btn btn-danger ml-3 px-3 py-1 text-right" id="logoutButton" style="display: none;" onclick="window.location.href = 'index.html';">Logout</button>
+            </div>
             <p>Fill out the form below to get in touch with us:</p>
             <div id="Message_Details">
                 <label for="message">Message:</label>
                 <textarea class="form-control" id="message" name="message" rows="4" required></textarea>
                 <br>
-                <button class="btn mb-3 px-4" id="send_contact">Submit</button>
+                <button class="btn mb-4 px-5 py-2" id="send_contact">Submit</button>
             </div>
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d600.9291092778333!2d120.81378574405535!3d14.851241444723184!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x339653d0415df3f1%3A0x2d3a1275bf34abc9!2sVR27%2BJF2%2C%20Valenzuela%20St%2C%20Malolos%2C%203000%20Bulacan!5e1!3m2!1sen!2sph!4v1696411901505!5m2!1sen!2sph" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            
         </div>
     </main>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
